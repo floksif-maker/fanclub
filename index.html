@@ -1,10 +1,184 @@
-body {
-    margin: 0;
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-    color: #fff;
-    background: linear-gradient(135deg, #2c003e, #5c33ff, #ff77dd);
-    background-size: 600% 600%;
-    animation: gradientShift 20s ease infinite;
-}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Фанклуб — Afalinariel</title>
+    <style>
+        /* Фон космічний, загадковий */
+        body {
+            margin: 0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #fff;
+            background: linear-gradient(135deg, #2c003e, #5c33ff, #ff77dd);
+            background-size: 600% 600%;
+            animation: gradientShift 20s ease infinite;
+        }
 
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 50% 100%; }
+            50% { background-position: 100% 50%; }
+            75% { background-position: 50% 0%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Header */
+        header {
+            background: rgba(127,90,240,0.9);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 12px;
+            font-weight: bold;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 60px;
+            text-align: center;
+            background: rgba(255, 240, 255, 0.3);
+            border-top: 2px solid #ffb3f5;
+            border-radius: 20px;
+            margin: 20px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+        .hero button {
+            padding: 12px 24px;
+            margin-top: 20px;
+            background: #ff77dd;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .hero button:hover {
+            background: #ff55bb;
+        }
+
+        /* Блоки: сни, цитати, годинник */
+        .dreams, .quotes, .clock-calendar {
+            padding: 30px;
+            margin: 20px;
+            background: rgba(76, 0, 153, 0.6); /* фіолетова прозорість */
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        /* Сни */
+        .dream {
+            padding: 12px;
+            margin: 10px 0;
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px;
+            transition: transform 0.3s, background 0.3s;
+            cursor: pointer;
+        }
+        .dream:hover {
+            transform: scale(1.05);
+            background: rgba(255,200,255,0.3);
+        }
+
+        /* Цитати */
+        #quote {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+        .quotes button {
+            padding: 8px 16px;
+            background: #7f5af0;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .quotes button:hover {
+            background: #5c3dbb;
+        }
+
+        /* Годинник та календар */
+        .clock-calendar p {
+            font-size: 20px;
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Фанклуб Afalinariel</h1>
+        <nav>
+            <a href="#">Головна</a>
+            <a href="#">Про неї</a>
+            <a href="#">Галерея</a>
+            <a href="#">Новини</a>
+            <a href="#">Контакти</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>Ласкаво просимо до фанклубу Afalinariel!</h2>
+        <p>Пригоди, сни та магія оживають тут! 💫</p>
+        <button id="magicBtn">Дивитися більше</button>
+    </section>
+
+    <section class="dreams">
+        <h2>Цікаві сни та пригоди</h2>
+        <div class="dream">✨ Летіла над містом у фантастичному світі...</div>
+        <div class="dream">🌌 Подорож у космос і незвідані світи...</div>
+        <div class="dream">🌠 Таємниці нічного неба та магія повітря...</div>
+    </section>
+
+    <section class="quotes">
+        <h2>Цитати дня</h2>
+        <p id="quote">Натисни кнопку, щоб побачити цитату ✨</p>
+        <button id="newQuote">Нова цитата</button>
+    </section>
+
+    <section class="clock-calendar">
+        <h2>Годинник та Календар</h2>
+        <p id="time">00:00:00</p>
+        <p id="date">00.00.0000</p>
+    </section>
+
+    <script>
+        // Поп-up кнопка
+        const magicBtn = document.getElementById('magicBtn');
+        magicBtn.addEventListener('click', () => {
+            alert('Вітаємо у фанклубі Afalinariel! 🌸✨');
+        });
+
+        // Цитати дня
+        const quotes = [
+            "Сни — це портал у інший світ 🌙",
+            "Пригоди починаються там, де закінчується страх 💫",
+            "Кожна пригода — шанс знайти себе 🌀",
+            "Мрії оживають там, де ти віриш у чудеса ✨",
+            "Найцікавіші історії створюємо ми самі 🌟"
+        ];
+
+        document.getElementById('newQuote').addEventListener('click', () => {
+            const random = quotes[Math.floor(Math.random() * quotes.length)];
+            document.getElementById('quote').textContent = random;
+        });
+
+        // Годинник та календар
+        function updateClockCalendar() {
+            const now = new Date();
+            const time = now.toLocaleTimeString('uk-UA', {hour12:false});
+            const date = now.toLocaleDateString('uk-UA');
+            document.getElementById('time').textContent = time;
+            document.getElementById('date').textContent = date;
+        }
+        setInterval(updateClockCalendar, 1000);
+        updateClockCalendar();
+    </script>
+</body>
+</html>
 
